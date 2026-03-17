@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="INKS-PRINTER_MULTIDIMENSIONAL.DW_Northwind_Traders_2"
+  DTS:DTSID="{3284BF44-D66F-45F2-8F05-37E4EEDFC3A0}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=INKS-PRINTER\MULTIDIMENSIONAL;Initial Catalog=DW_Northwind_Traders_2;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-DW_Northwind_Traders-{3284BF44-D66F-45F2-8F05-37E4EEDFC3A0}INKS-PRINTER\MULTIDIMENSIONAL.DW_Northwind_Traders_2;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
