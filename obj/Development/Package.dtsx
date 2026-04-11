@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="87"
-  DTS:VersionGUID="{F974B26B-AC7D-4BC8-9741-D9BB91D3E8FA}">
+  DTS:VersionBuild="127"
+  DTS:VersionGUID="{78748DBE-964D-4BAD-B4B2-9769172385DE}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -37,7 +37,19 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\ETL\Cuotas_Ventas.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\TareaBI02 - ETL\Cuotas_Ventas.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[INKS-PRINTER\MULTIDIMENSIONAL.Northwind_Analisis]"
+      DTS:CreationName="MSOLAP100"
+      DTS:DTSID="{8BD29CAE-1400-4289-ACD2-AC38235B0623}"
+      DTS:ObjectName="INKS-PRINTER\MULTIDIMENSIONAL.Northwind_Analisis">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="0"
+          DTS:ConnectRetryInterval="0"
+          DTS:ConnectionString="Data Source=INKS-PRINTER\MULTIDIMENSIONAL;Initial Catalog=Northwind_Analisis;Provider=MSOLAP.8;Integrated Security=SSPI;Impersonation Level=Impersonate;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -47,7 +59,7 @@
       DTS:ObjectName="Plantilla_DW.xlsx">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\ETL\Plantilla_DW.xlsx" />
+          DTS:ConnectionString="C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\TareaBI02 - ETL\Plantilla_DW.xlsx" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -57,7 +69,7 @@
       DTS:ObjectName="Reporte_Final.xlsx">
       <DTS:ObjectData>
         <DTS:ConnectionManager
-          DTS:ConnectionString="C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\ETL\Reporte_Final.xlsx" />
+          DTS:ConnectionString="C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\TareaBI02 - ETL\Reporte_Final.xlsx" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -145,6 +157,24 @@
           DTS:ObjectName="Constraint 1"
           DTS:To="Package\Generar Excel\Copiar Tablas DW" />
       </DTS:PrecedenceConstraints>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Limpiar Duplicados"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{AC819C0A-0FFB-4500-930D-D15255F8D765}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Limpiar Duplicados"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2025; © 2025 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{579C75C2-90DE-4E9A-AEAE-34D0FAD3000A}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="USE [DW_Northwind_Traders]&#xA;GO&#xA;&#xA;-- ==========================================&#xA;-- BLOQUE 1: UNIFICACIÓN DE SAO PAULO&#xA;-- ==========================================&#xA;DECLARE @IdMalo INT = 76;   -- El que tiene Estado en N/A&#xA;DECLARE @IdBueno INT = 77;  -- El que tiene Estado en SP&#xA;&#xA;-- Migramos las dependencias&#xA;UPDATE dbo.Dim_Cliente SET Geografia_ID = @IdBueno WHERE Geografia_ID = @IdMalo;&#xA;UPDATE dbo.Dim_Proveedor SET Geografia_ID = @IdBueno WHERE Geografia_ID = @IdMalo;&#xA;UPDATE dbo.Dim_Empleado SET Geografia_ID = @IdBueno WHERE Geografia_ID = @IdMalo;&#xA;&#xA;-- Eliminamos el huérfano&#xA;DELETE FROM dbo.Dim_Geografia WHERE Geografia_ID = @IdMalo;&#xA;&#xA;PRINT '¡Unificación de Sao Paulo completada con éxito!';&#xA;GO&#xA;&#xA;-- ==========================================&#xA;-- BLOQUE 2: UNIFICACIÓN DE FRANKFURT&#xA;-- ==========================================&#xA;DECLARE @IdMalo2 INT = 30;  -- &quot;Frankfurt a.M.&quot; (El que vamos a borrar)&#xA;DECLARE @IdBueno2 INT = 29; -- &quot;Frankfurt&quot; (El que se va a quedar)&#xA;&#xA;-- Migramos las dependencias&#xA;UPDATE dbo.Dim_Cliente SET Geografia_ID = @IdBueno2 WHERE Geografia_ID = @IdMalo2;&#xA;UPDATE dbo.Dim_Proveedor SET Geografia_ID = @IdBueno2 WHERE Geografia_ID = @IdMalo2;&#xA;UPDATE dbo.Dim_Empleado SET Geografia_ID = @IdBueno2 WHERE Geografia_ID = @IdMalo2;&#xA;&#xA;-- Eliminamos el huérfano (¡Corregido a @IdMalo2!)&#xA;DELETE FROM dbo.Dim_Geografia WHERE Geografia_ID = @IdMalo2;&#xA;&#xA;PRINT '¡Unificación de Frankfurt completada con éxito!';&#xA;GO" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
       DTS:refId="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor"
@@ -4137,7 +4167,7 @@ FROM EmployeeTerritories;</property>
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{298B49D8-6FEC-4DB7-A214-0650AC73F558}"
-          SQLTask:SqlStatementSource="DECLARE @FechaInicio DATE = '1990-01-01';&#xA;DECLARE @FechaFin DATE = '2030-12-31';&#xA;DECLARE @FechaActual DATE = @FechaInicio;&#xA;&#xA;-- Evitar que el script muestre mensajes de &quot;1 row affected&quot; por cada día (son miles)&#xA;SET NOCOUNT ON; &#xA;&#xA;WHILE @FechaActual &lt;= @FechaFin&#xA;BEGIN&#xA;    INSERT INTO DW_Northwind_Traders.dbo.Dim_Fecha &#xA;    (&#xA;        Fecha_ID, &#xA;        Dia, &#xA;        Mes, &#xA;        Trimestre, &#xA;        Año&#xA;    )&#xA;    VALUES &#xA;    (&#xA;        -- Genera el ID formato YYYYMMDD (Ej: 19960704)&#xA;        YEAR(@FechaActual) * 10000 + MONTH(@FechaActual) * 100 + DAY(@FechaActual),&#xA;        DAY(@FechaActual),&#xA;        MONTH(@FechaActual),&#xA;        DATEPART(QUARTER, @FechaActual),&#xA;        YEAR(@FechaActual)&#xA;    );&#xA;&#xA;    -- Avanzar al siguiente día&#xA;    SET @FechaActual = DATEADD(DAY, 1, @FechaActual);&#xA;END;&#xA;&#xA;SET NOCOUNT OFF;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="-- ============================================================================&#xA;-- 1. CREACIÓN O ACTUALIZACIÓN DEL MIEMBRO DESCONOCIDO (-1)&#xA;-- ============================================================================&#xA;IF NOT EXISTS (SELECT 1 FROM DW_Northwind_Traders.dbo.Dim_Fecha WHERE Fecha_ID = -1)&#xA;BEGIN&#xA;    INSERT INTO DW_Northwind_Traders.dbo.Dim_Fecha &#xA;    (Fecha_ID, Dia, Mes, Trimestre, Año, Nombre_Mes, Nombre_Trimestre)&#xA;    VALUES &#xA;    (-1, 0, 0, 0, 0, 'Sin Mes', 'Sin Trimestre');&#xA;END&#xA;ELSE&#xA;BEGIN&#xA;    -- Si ya existe, nos aseguramos de actualizar los nulos&#xA;    UPDATE DW_Northwind_Traders.dbo.Dim_Fecha &#xA;    SET Nombre_Mes = 'Sin Mes', &#xA;        Nombre_Trimestre = 'Sin Trimestre'&#xA;    WHERE Fecha_ID = -1 AND Nombre_Mes IS NULL;&#xA;END;&#xA;&#xA;-- ============================================================================&#xA;-- 2. POBLACIÓN O ACTUALIZACIÓN DEL CALENDARIO NORMAL&#xA;-- ============================================================================&#xA;-- NOTA: Si tienes ventas anteriores a 2020, te recomiendo cambiar esto a 1990-01-01&#xA;DECLARE @FechaInicio DATE = '2020-01-01'; &#xA;DECLARE @FechaFin DATE = '2030-12-31';&#xA;DECLARE @FechaActual DATE = @FechaInicio;&#xA;&#xA;-- Evitar que el script muestre mensajes de &quot;1 row affected&quot; por cada día (son miles)&#xA;SET NOCOUNT ON; &#xA;&#xA;WHILE @FechaActual &lt;= @FechaFin&#xA;BEGIN&#xA;    -- Variable para no repetir el cálculo matemático tantas veces&#xA;    DECLARE @CurrentFechaID INT = YEAR(@FechaActual) * 10000 + MONTH(@FechaActual) * 100 + DAY(@FechaActual);&#xA;&#xA;    -- Validación para evitar error de Primary Key si el día ya existe&#xA;    IF NOT EXISTS (SELECT 1 FROM DW_Northwind_Traders.dbo.Dim_Fecha WHERE Fecha_ID = @CurrentFechaID)&#xA;    BEGIN&#xA;        -- SI NO EXISTE: Hacemos el INSERT completo&#xA;        INSERT INTO DW_Northwind_Traders.dbo.Dim_Fecha &#xA;        (&#xA;            Fecha_ID, Dia, Mes, Trimestre, Año, Nombre_Mes, Nombre_Trimestre&#xA;        )&#xA;        VALUES &#xA;        (&#xA;            @CurrentFechaID,&#xA;            DAY(@FechaActual),&#xA;            MONTH(@FechaActual),&#xA;            DATEPART(QUARTER, @FechaActual),&#xA;            YEAR(@FechaActual),&#xA;            &#xA;            -- Traducción automática del Mes&#xA;            CASE MONTH(@FechaActual)&#xA;                WHEN 1 THEN 'Enero' WHEN 2 THEN 'Febrero' WHEN 3 THEN 'Marzo'&#xA;                WHEN 4 THEN 'Abril' WHEN 5 THEN 'Mayo' WHEN 6 THEN 'Junio'&#xA;                WHEN 7 THEN 'Julio' WHEN 8 THEN 'Agosto' WHEN 9 THEN 'Septiembre'&#xA;                WHEN 10 THEN 'Octubre' WHEN 11 THEN 'Noviembre' WHEN 12 THEN 'Diciembre'&#xA;            END,&#xA;&#xA;            -- Traducción automática del Trimestre&#xA;            CASE DATEPART(QUARTER, @FechaActual)&#xA;                WHEN 1 THEN 'Primer Trimestre'&#xA;                WHEN 2 THEN 'Segundo Trimestre'&#xA;                WHEN 3 THEN 'Tercer Trimestre'&#xA;                WHEN 4 THEN 'Cuarto Trimestre'&#xA;            END&#xA;        );&#xA;    END&#xA;    ELSE&#xA;    BEGIN&#xA;        -- SI YA EXISTE: Hacemos un UPDATE solo a los campos de texto que estén en NULL&#xA;        UPDATE DW_Northwind_Traders.dbo.Dim_Fecha &#xA;        SET &#xA;            Nombre_Mes = CASE MONTH(@FechaActual)&#xA;                WHEN 1 THEN 'Enero' WHEN 2 THEN 'Febrero' WHEN 3 THEN 'Marzo'&#xA;                WHEN 4 THEN 'Abril' WHEN 5 THEN 'Mayo' WHEN 6 THEN 'Junio'&#xA;                WHEN 7 THEN 'Julio' WHEN 8 THEN 'Agosto' WHEN 9 THEN 'Septiembre'&#xA;                WHEN 10 THEN 'Octubre' WHEN 11 THEN 'Noviembre' WHEN 12 THEN 'Diciembre'&#xA;            END,&#xA;            Nombre_Trimestre = CASE DATEPART(QUARTER, @FechaActual)&#xA;                WHEN 1 THEN 'Primer Trimestre'&#xA;                WHEN 2 THEN 'Segundo Trimestre'&#xA;                WHEN 3 THEN 'Tercer Trimestre'&#xA;                WHEN 4 THEN 'Cuarto Trimestre'&#xA;            END&#xA;        WHERE Fecha_ID = @CurrentFechaID AND Nombre_Mes IS NULL;&#xA;    END;&#xA;&#xA;    -- Avanzar al siguiente día&#xA;    SET @FechaActual = DATEADD(DAY, 1, @FechaActual);&#xA;END;&#xA;&#xA;SET NOCOUNT OFF;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -4897,14 +4927,25 @@ FROM EmployeeTerritories;</property>
     ISNULL(p.ReorderLevel, 0) AS Nivel_Reorden,
     ISNULL(p.UnitsOnOrder, 0) AS Unidades_En_Transito,
     
-    -- 4. Cálculo Avanzado: Días de Inactividad (Días desde su última venta)
-    ISNULL(DATEDIFF(day, 
-        (SELECT MAX(o.OrderDate) 
-         FROM [Northwind].[dbo].[Order Details] od 
-         INNER JOIN [Northwind].[dbo].[Orders] o ON od.OrderID = o.OrderID
-         WHERE od.ProductID = p.ProductID), 
-        GETDATE()
-    ), 0) AS Dias_Inactividad
+-- 4. Cálculo Avanzado: Días de Inactividad (Días desde su última venta)
+    -- Control para evitar negativos si la fecha desplazada cae en el futuro
+    ISNULL(
+        CASE 
+            WHEN DATEDIFF(day, 
+                    (SELECT DATEADD(year, 28, MAX(o.OrderDate)) 
+                     FROM [Northwind].[dbo].[Order Details] od 
+                     INNER JOIN [Northwind].[dbo].[Orders] o ON od.OrderID = o.OrderID
+                     WHERE od.ProductID = p.ProductID), 
+                    GETDATE()) &lt; 0 
+            THEN 0 
+            ELSE DATEDIFF(day, 
+                    (SELECT DATEADD(year, 28, MAX(o.OrderDate)) 
+                     FROM [Northwind].[dbo].[Order Details] od 
+                     INNER JOIN [Northwind].[dbo].[Orders] o ON od.OrderID = o.OrderID
+                     WHERE od.ProductID = p.ProductID), 
+                    GETDATE())
+        END, 
+    0) AS Dias_Inactividad
 
 FROM [Northwind].[dbo].[Products] p
 
@@ -5353,22 +5394,31 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
     CAST(ISNULL(o.Freight, 0) AS DECIMAL(18,2)) AS Costo_Flete,
     
     -- Días de preparación: Diferencia entre la orden y el envío.
-    -- (Si aún no se envía, ponemos 0 temporalmente)
+    -- (No sumamos 28 años aquí porque la diferencia de días se mantiene intacta)
     ISNULL(DATEDIFF(day, o.OrderDate, o.ShippedDate), 0) AS Dias_Preparacion,
     
--- Días de retraso estrictos (Si se adelantó o llegó a tiempo, pone 0. Si llegó tarde, pone los días de mora)
-ISNULL(CASE 
-    WHEN DATEDIFF(day, o.RequiredDate, o.ShippedDate) &lt; 0 THEN 0 
-    ELSE DATEDIFF(day, o.RequiredDate, o.ShippedDate) 
-END, 0) AS Dias_Retraso,
+    -- Días de retraso estrictos
+    ISNULL(CASE 
+        WHEN DATEDIFF(day, o.RequiredDate, o.ShippedDate) &lt; 0 THEN 0 
+        ELSE DATEDIFF(day, o.RequiredDate, o.ShippedDate) 
+    END, 0) AS Dias_Retraso,
     
-    -- 2. Llaves de Tiempo (Role-Playing Dimensions)
-    YEAR(o.OrderDate) * 10000 + MONTH(o.OrderDate) * 100 + DAY(o.OrderDate) AS Fecha_Orden_ID,
+    -- 2. Llaves de Tiempo (Role-Playing Dimensions) -&gt; ¡AQUÍ APLICAMOS EL TIME SHIFTING!
+    YEAR(DATEADD(year, 28, o.OrderDate)) * 10000 + 
+    MONTH(DATEADD(year, 28, o.OrderDate)) * 100 + 
+    DAY(DATEADD(year, 28, o.OrderDate)) AS Fecha_Orden_ID,
     
-    YEAR(o.RequiredDate) * 10000 + MONTH(o.RequiredDate) * 100 + DAY(o.RequiredDate) AS Fecha_Requerida_ID,
+    YEAR(DATEADD(year, 28, o.RequiredDate)) * 10000 + 
+    MONTH(DATEADD(year, 28, o.RequiredDate)) * 100 + 
+    DAY(DATEADD(year, 28, o.RequiredDate)) AS Fecha_Requerida_ID,
 
-    -- Manejo del Nulo en la Fecha de Envío (Si no se ha enviado, ponemos -1 o una fecha "falsa" controlada)
-    ISNULL(YEAR(o.ShippedDate) * 10000 + MONTH(o.ShippedDate) * 100 + DAY(o.ShippedDate), -1) AS Fecha_Envio_ID,
+    -- Manejo del Nulo en la Fecha de Envío (con el desplazamiento de 28 años incluido)
+    ISNULL(
+        YEAR(DATEADD(year, 28, o.ShippedDate)) * 10000 + 
+        MONTH(DATEADD(year, 28, o.ShippedDate)) * 100 + 
+        DAY(DATEADD(year, 28, o.ShippedDate)), 
+        -1
+    ) AS Fecha_Envio_ID,
     
     -- 3. Llaves de Dimensiones (Desde tu DW)
     dce.Compania_Envio_ID,
@@ -5376,7 +5426,7 @@ END, 0) AS Dias_Retraso,
 
 FROM [Northwind].[dbo].[Orders] o
 
--- 1. Traemos los nombres desde el OLTP (Usamos LEFT JOIN en Shippers por si hay pedidos sin transportista asignado)
+-- 1. Traemos los nombres desde el OLTP 
 LEFT JOIN [Northwind].[dbo].[Shippers] s ON o.ShipVia = s.ShipperID
 INNER JOIN [Northwind].[dbo].[Customers] c ON o.CustomerID = c.CustomerID
 
@@ -5868,7 +5918,7 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Cliente] dc
     dp.Producto_ID,     -- Llave subrogada directa del DW
     
     -- Transformación de fecha a INT (YYYYMMDD)
-    YEAR(o.OrderDate) * 10000 + MONTH(o.OrderDate) * 100 + DAY(o.OrderDate) AS Fecha_ID,
+    YEAR(DATEADD(year, 28, o.OrderDate)) * 10000 + MONTH(DATEADD(year, 28, o.OrderDate)) * 100 + DAY(DATEADD(year, 28, o.OrderDate)) AS Fecha_ID,
     
     od.Quantity AS Cantidad,
     
@@ -6210,6 +6260,22 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
           DTS:To="Package\Preparación Tablas Inicio\Reiniciar IDs" />
       </DTS:PrecedenceConstraints>
     </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Procesamiento de Cubo"
+      DTS:CreationName="Microsoft.DTSProcessingTask"
+      DTS:Description="Analysis Services Processing Task"
+      DTS:DTSID="{0F751D8A-C373-4235-B947-8A4A49B71346}"
+      DTS:ExecutableType="Microsoft.DTSProcessingTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Procesamiento de Cubo"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <ASProcessingData
+          ConnectionName="INKS-PRINTER\MULTIDIMENSIONAL.Northwind_Analisis"
+          ProcessingCommands="&lt;Batch xmlns=&quot;http://schemas.microsoft.com/analysisservices/2003/engine&quot;&gt;&#xA;  &lt;Process xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:ddl2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2&quot; xmlns:ddl2_2=&quot;http://schemas.microsoft.com/analysisservices/2003/engine/2/2&quot; xmlns:ddl100_100=&quot;http://schemas.microsoft.com/analysisservices/2008/engine/100/100&quot; xmlns:ddl200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200&quot; xmlns:ddl200_200=&quot;http://schemas.microsoft.com/analysisservices/2010/engine/200/200&quot; xmlns:ddl300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300&quot; xmlns:ddl300_300=&quot;http://schemas.microsoft.com/analysisservices/2011/engine/300/300&quot; xmlns:ddl400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400&quot; xmlns:ddl400_400=&quot;http://schemas.microsoft.com/analysisservices/2012/engine/400/400&quot; xmlns:ddl500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500&quot; xmlns:ddl500_500=&quot;http://schemas.microsoft.com/analysisservices/2013/engine/500/500&quot;&gt;&#xA;    &lt;Object&gt;&#xA;      &lt;DatabaseID&gt;Northwind_Analisis&lt;/DatabaseID&gt;&#xA;      &lt;CubeID&gt;DW Northwind Traders&lt;/CubeID&gt;&#xA;    &lt;/Object&gt;&#xA;    &lt;Type&gt;ProcessFull&lt;/Type&gt;&#xA;    &lt;WriteBackTableCreation&gt;UseExisting&lt;/WriteBackTableCreation&gt;&#xA;  &lt;/Process&gt;&#xA;&lt;/Batch&gt;" />
+      </DTS:ObjectData>
+    </DTS:Executable>
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
@@ -6229,13 +6295,13 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
       DTS:ObjectName="Constraint 1"
       DTS:To="Package\Poblar Tablas de Hechos" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 16]"
+      DTS:refId="Package.PrecedenceConstraints[Constraint 10]"
       DTS:CreationName=""
-      DTS:DTSID="{E7EBB117-37FB-48AB-A9EC-AE209BC8713A}"
-      DTS:From="Package\Preparación Tablas Inicio"
+      DTS:DTSID="{D19DB701-C418-4B18-BCE7-67D84D9A92B4}"
+      DTS:From="Package\Generar Excel"
       DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 16"
-      DTS:To="Package\Población Dim_Producto" />
+      DTS:ObjectName="Constraint 10"
+      DTS:To="Package\Procesamiento de Cubo" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 17]"
       DTS:CreationName=""
@@ -6244,14 +6310,6 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 17"
       DTS:To="Package\Poblar Dim_Fecha" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[Constraint 18]"
-      DTS:CreationName=""
-      DTS:DTSID="{33EDE803-4CB4-4798-B0AE-87AD4AAFA6F4}"
-      DTS:From="Package\Preparación Tablas Inicio"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="Constraint 18"
-      DTS:To="Package\Población Dim_Territorio_Empleados" />
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
       DTS:CreationName=""
@@ -6311,10 +6369,18 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
     <DTS:PrecedenceConstraint
       DTS:refId="Package.PrecedenceConstraints[Constraint 8]"
       DTS:CreationName=""
-      DTS:DTSID="{0E254552-C84F-421C-B14F-7298A45CD71B}"
+      DTS:DTSID="{4BA3C729-6F2A-406F-9FFC-217B904670B3}"
       DTS:From="Package\Poblar Tablas de Hechos"
       DTS:LogicalAnd="True"
       DTS:ObjectName="Constraint 8"
+      DTS:To="Package\Limpiar Duplicados" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 9]"
+      DTS:CreationName=""
+      DTS:DTSID="{4DC4BFE1-9927-494E-AA8F-801BADFDB534}"
+      DTS:From="Package\Limpiar Duplicados"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 9"
       DTS:To="Package\Generar Excel" />
   </DTS:PrecedenceConstraints>
   <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
@@ -6388,10 +6454,14 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="205.6,212.8"
-          Size="205.6,256"
+          PanelSize="205.6,216"
+          Size="205.6,259.2"
           Id="Package\Generar Excel"
-          TopLeft="658.520409565081,865.576050007865" />
+          TopLeft="650.61224628294,949.239915536847" />
+        <NodeLayout
+          Size="167.2,41.6"
+          Id="Package\Limpiar Duplicados"
+          TopLeft="666.07142998932,868.823528838663" />
         <NodeLayout
           Size="146.4,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Cliente"
@@ -6632,8 +6702,8 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         <ContainerLayout
           HeaderHeight="43"
           IsExpanded="True"
-          PanelSize="456,155.2"
-          Size="456,198.4"
+          PanelSize="456,159.2"
+          Size="456,202.4"
           Id="Package\Poblar Tablas de Hechos"
           TopLeft="525.663266425122,638.817226633339" />
         <NodeLayout
@@ -6730,40 +6800,6 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 16]"
-          TopLeft="601.910885541671,238.724369704139">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-388.062359241804,100.773295735913"
-              Start="0,0"
-              End="-388.062359241804,93.2732957359134">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.3968266696779" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.3968266696779"
-                    Point2="0,26.3968266696779"
-                    Point3="-4,26.3968266696779" />
-                  <mssgle:LineSegment
-                    End="-384.062359241804,26.3968266696779" />
-                  <mssgle:CubicBezierSegment
-                    Point1="-384.062359241804,26.3968266696779"
-                    Point2="-388.062359241804,26.3968266696779"
-                    Point3="-388.062359241804,30.3968266696779" />
-                  <mssgle:LineSegment
-                    End="-388.062359241804,93.2732957359134" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 17]"
           TopLeft="641.777552208337,238.724369704139">
           <EdgeLayout.Curve>
@@ -6789,40 +6825,6 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
                     Point3="-211.059070739533,41.114729955458" />
                   <mssgle:LineSegment
                     End="-211.059070739533,84.4003265616834" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package.PrecedenceConstraints[Constraint 18]"
-          TopLeft="721.510885541671,238.724369704139">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="360.75124799942,53.8601305627963"
-              Start="0,0"
-              End="360.75124799942,46.3601305627963">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,31.4818191766185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,31.4818191766185"
-                    Point2="0,35.4818191766185"
-                    Point3="4,35.4818191766185" />
-                  <mssgle:LineSegment
-                    End="356.75124799942,35.4818191766185" />
-                  <mssgle:CubicBezierSegment
-                    Point1="356.75124799942,35.4818191766185"
-                    Point2="360.75124799942,35.4818191766185"
-                    Point3="360.75124799942,39.4818191766185" />
-                  <mssgle:LineSegment
-                    End="360.75124799942,46.3601305627963" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -6912,17 +6914,17 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,21.8185623086359" />
+                    End="0,48.0370496806123" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,21.8185623086359"
-                    Point2="0,25.8185623086359"
-                    Point3="-4,25.8185623086359" />
+                    Point1="0,48.0370496806123"
+                    Point2="0,52.0370496806123"
+                    Point3="-4,52.0370496806123" />
                   <mssgle:LineSegment
-                    End="-249.932200449302,25.8185623086359" />
+                    End="-249.932200449302,52.0370496806123" />
                   <mssgle:CubicBezierSegment
-                    Point1="-249.932200449302,25.8185623086359"
-                    Point2="-253.932200449302,25.8185623086359"
-                    Point3="-253.932200449302,29.8185623086359" />
+                    Point1="-249.932200449302,52.0370496806123"
+                    Point2="-253.932200449302,52.0370496806123"
+                    Point3="-253.932200449302,56.0370496806123" />
                   <mssgle:LineSegment
                     End="-253.932200449302,79.5327263664042" />
                 </mssgle:SegmentCollection>
@@ -7002,17 +7004,17 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,171.769331426519" />
+                    End="0,154.290339845201" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,171.769331426519"
-                    Point2="0,175.769331426519"
-                    Point3="-4,175.769331426519" />
+                    Point1="0,154.290339845201"
+                    Point2="0,158.290339845201"
+                    Point3="-4,158.290339845201" />
                   <mssgle:LineSegment
-                    End="-432.654989280285,175.769331426519" />
+                    End="-432.654989280285,158.290339845201" />
                   <mssgle:CubicBezierSegment
-                    Point1="-432.654989280285,175.769331426519"
-                    Point2="-436.654989280285,175.769331426519"
-                    Point3="-436.654989280285,179.769331426519" />
+                    Point1="-432.654989280285,158.290339845201"
+                    Point2="-436.654989280285,158.290339845201"
+                    Point3="-436.654989280285,162.290339845201" />
                   <mssgle:LineSegment
                     End="-436.654989280285,205.405135464306" />
                 </mssgle:SegmentCollection>
@@ -7036,17 +7038,17 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,195.816401223564" />
+                    End="0,175.469762585936" />
                   <mssgle:CubicBezierSegment
-                    Point1="0,195.816401223564"
-                    Point2="0,199.816401223564"
-                    Point3="4,199.816401223564" />
+                    Point1="0,175.469762585936"
+                    Point2="0,179.469762585936"
+                    Point3="4,179.469762585936" />
                   <mssgle:LineSegment
-                    End="244.278118289651,199.816401223564" />
+                    End="244.278118289651,179.469762585936" />
                   <mssgle:CubicBezierSegment
-                    Point1="244.278118289651,199.816401223564"
-                    Point2="248.278118289651,199.816401223564"
-                    Point3="248.278118289651,203.816401223564" />
+                    Point1="244.278118289651,179.469762585936"
+                    Point2="248.278118289651,179.469762585936"
+                    Point3="248.278118289651,183.469762585936" />
                   <mssgle:LineSegment
                     End="248.278118289651,259.092530367517" />
                 </mssgle:SegmentCollection>
@@ -7059,18 +7061,66 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         </EdgeLayout>
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint 8]"
-          TopLeft="757.491837995102,837.217226633339">
+          TopLeft="751.667348207221,841.217226633339">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,28.358823374526"
+              EndConnector="0,27.606302205324"
               Start="0,0"
-              End="0,20.858823374526">
+              End="0,20.106302205324">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,20.858823374526" />
+                    End="0,20.106302205324" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 9]"
+          TopLeft="751.54183813613,910.423528838663">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,38.8163866981839"
+              Start="0,0"
+              End="0,31.3163866981839">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.3163866981839" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Procesamiento de Cubo"
+          TopLeft="953.142858882339,1054.83529377647" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 10]"
+          TopLeft="856.21224628294,1077.23760465666">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="96.9306125993992,0"
+              Start="0,0"
+              End="89.4306125993992,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="89.4306125993992,0" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7090,7 +7140,7 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         <NodeLayout
           Size="173.6,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Cliente\Destino Dim_Cliente"
-          TopLeft="230.999996557832,202.999996975064" />
+          TopLeft="235.399996492267,239.399996432662" />
         <NodeLayout
           Size="177.6,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Cliente\Busqueda Geográfica"
@@ -7105,14 +7155,14 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,34.3999988675118"
+              EndConnector="0,34.3999988675119"
               Start="0,0"
-              End="0,26.8999988675118">
+              End="0,26.8999988675119">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,26.8999988675118" />
+                    End="0,26.8999988675119" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7125,25 +7175,25 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Cliente.Paths[Lookup Match Output]"
-          TopLeft="319.799996542931,172.599998047948">
+          TopLeft="321.999996510148,172.599998047948">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,30.3999989271163"
+              EndConnector="0,66.7999983847139"
               Start="0,0"
-              End="0,22.8999989271163">
+              End="0,59.2999983847139">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,22.8999989271163" />
+                    End="0,59.2999983847139" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,5.64531196355816,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,23.8453116923569,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -7255,7 +7305,7 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,5.96884187992576,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,5.96884187992575,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -7318,21 +7368,21 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         <NodeLayout
           Size="187.2,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Geografia\Destino Dim_Geografia"
-          TopLeft="252.999996230006,174.999997392297" />
+          TopLeft="259.428567672262,220.117644411573" />
         <EdgeLayout
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Geografia.Paths[OLE DB Source Output]"
-          TopLeft="349.69999589473,117.599998867512">
+          TopLeft="352.914281615858,117.599998867512">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,57.3999985247851"
+              EndConnector="0,102.517645544061"
               Start="0,0"
-              End="0,49.8999985247851">
+              End="0,95.0176455440613">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,49.8999985247851" />
+                    End="0,95.0176455440613" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
@@ -7375,7 +7425,7 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         <NodeLayout
           Size="170.4,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Proveedor\OLE DB Destination"
-          TopLeft="250.999996259809,244.999996349216" />
+          TopLeft="245.358970702841,347.846148662843" />
         <NodeLayout
           Size="177.6,41.6"
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Proveedor\Busqueda Geográfica"
@@ -7410,31 +7460,54 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
         </EdgeLayout>
         <EdgeLayout
           Id="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Proveedor.Paths[Lookup Match Output]"
-          TopLeft="333.499996326864,206.599997541308">
+          TopLeft="330.67948354838,206.599997541308">
           <EdgeLayout.Curve>
             <mssgle:Curve
               StartConnector="{assembly:Null}"
-              EndConnector="0,38.3999988079071"
+              EndConnector="0,141.246151121535"
               Start="0,0"
-              End="0,30.8999988079071">
+              End="0,133.746151121535">
               <mssgle:Curve.Segments>
                 <mssgle:SegmentCollection
                   Capacity="5">
                   <mssgle:LineSegment
-                    End="0,30.8999988079071" />
+                    End="0,133.746151121535" />
                 </mssgle:SegmentCollection>
               </mssgle:Curve.Segments>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,9.64531190395356,96.3827734375,11.609375"
+              BoundingBox="-48.19138671875,61.0683880607674,96.3827734375,11.609375"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Proveedor\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Población de Dim_Empleado, Dim_Cliente y Dim_Proveedor\Poblar Dim_Proveedor\Busqueda Geográfica">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
   <TaskHost
     design-time-name="Package\Población Dim_Producto\Poblar Dim_Categoria">
     <LayoutInfo>
@@ -7805,7 +7878,7 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
     design-time-name="Package\Poblar Tablas de Hechos\Poblar Fact_Cotas_Ventas">
     <LayoutInfo>
       <GraphLayout
-        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="206.4,41.6"
           Id="Package\Poblar Tablas de Hechos\Poblar Fact_Cotas_Ventas\Destino Fact_Cotas_Ventas"
@@ -7841,7 +7914,9 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7863,7 +7938,9 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
         <EdgeLayout
@@ -7885,7 +7962,9 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
+            <mssgm:EdgeLabel
+              BoundingBox="0,0,0,0"
+              RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
       </GraphLayout>
@@ -8100,5 +8179,9 @@ INNER JOIN [DW_Northwind_Traders].[dbo].[Dim_Producto] dp
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <ConnectionManager
+    design-time-name="Package.ConnectionManagers[INKS-PRINTER\MULTIDIMENSIONAL.Northwind_Analisis]">
+    <ProjectReferenceName></ProjectReferenceName>
+  </ConnectionManager>
 </Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>

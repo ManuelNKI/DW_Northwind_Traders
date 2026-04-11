@@ -2,18 +2,18 @@
 <BuildLog xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <ProjectInfo>
     <Name>DW_Northwind_Traders</Name>
-    <LastWriteTime>2026-03-17T17:23:06.2517822Z</LastWriteTime>
+    <LastWriteTime>2026-04-11T17:49:10.8839388Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
     <ProjectBuildItemInfo>
       <Name>Package.dtsx</Name>
-      <LastWriteTime>2026-03-17T17:23:05.6346033Z</LastWriteTime>
+      <LastWriteTime>2026-04-11T17:48:51.472798Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
     <ProjectBuildItemInfo>
       <Name>ExportacionMasiva.dtsx</Name>
-      <LastWriteTime>2026-03-17T13:52:51.9450366Z</LastWriteTime>
+      <LastWriteTime>2026-04-05T01:04:53.897345Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>

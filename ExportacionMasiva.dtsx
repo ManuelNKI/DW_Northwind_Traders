@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="3/17/2026 8:47:39 AM"
@@ -12,7 +12,8 @@
   DTS:LocaleID="1033"
   DTS:MaxErrorCount="0"
   DTS:ObjectName="ExportacionMasiva"
-  DTS:VersionGUID="{0478E507-09A8-4DE1-8F3F-302F40A40ABA}">
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{811624F8-65F4-4E69-AC50-6CF7D38C14CC}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -25,7 +26,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\ETL\Reporte_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\TareaBI02 - ETL\Reporte_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -37,7 +38,7 @@
         <DTS:ConnectionManager
           DTS:ConnectRetryCount="0"
           DTS:ConnectRetryInterval="0"
-          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\ETL\Reporte_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
+          DTS:ConnectionString="Provider=Microsoft.ACE.OLEDB.16.0;Data Source=C:\Users\ramir\Desktop\Universidad\Inteligencia de Negocios\Deberes\TareaBI02 - ETL\Reporte_Final.xlsx;Extended Properties=&quot;EXCEL 12.0 XML;HDR=YES&quot;;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
     <DTS:ConnectionManager
@@ -601,7 +602,7 @@
                 <property
                   dataType="System.String"
                   description="Specifies the name of the database object used to open a rowset."
-                  name="OpenRowset">Dim_Fecha</property>
+                  name="OpenRowset">Dim_Fecha$</property>
                 <property
                   dataType="System.String"
                   description="Specifies the variable that contains the name of the database object used to open a rowset."
@@ -679,29 +680,58 @@
                       cachedName="Año"
                       externalMetadataColumnId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Año]"
                       lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Año]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].Columns[Nombre_Mes]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="Nombre_Mes"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Nombre_Mes]"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Mes]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].Columns[Nombre_Trimestre]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Nombre_Trimestre"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Nombre_Trimestre]"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Trimestre]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Fecha_ID]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="255"
                       name="Fecha_ID" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Dia]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="255"
                       name="Dia" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Mes]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="255"
                       name="Mes" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Trimestre]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="255"
                       name="Trimestre" />
                     <externalMetadataColumn
                       refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Año]"
-                      dataType="i4"
+                      dataType="wstr"
+                      length="255"
                       name="Año" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Nombre_Mes]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Destination 4 - Dim_Fecha.Inputs[Destination Input].ExternalColumns[Nombre_Trimestre]"
+                      dataType="wstr"
+                      length="255"
+                      name="Nombre_Trimestre" />
                   </externalMetadataColumns>
                 </input>
               </inputs>
@@ -1425,6 +1455,26 @@
                       lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Año]"
                       name="Año"
                       truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Mes]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].ExternalColumns[Nombre_Mes]"
+                      length="20"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Mes]"
+                      name="Nombre_Mes"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Trimestre]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].ExternalColumns[Nombre_Trimestre]"
+                      length="30"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].Columns[Nombre_Trimestre]"
+                      name="Nombre_Trimestre"
+                      truncationRowDisposition="FailComponent" />
                   </outputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1448,6 +1498,16 @@
                       refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].ExternalColumns[Año]"
                       dataType="i4"
                       name="Año" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].ExternalColumns[Nombre_Mes]"
+                      dataType="wstr"
+                      length="20"
+                      name="Nombre_Mes" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Output].ExternalColumns[Nombre_Trimestre]"
+                      dataType="wstr"
+                      length="30"
+                      name="Nombre_Trimestre" />
                   </externalMetadataColumns>
                 </output>
                 <output
@@ -1480,6 +1540,18 @@
                       dataType="i4"
                       lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[Año]"
                       name="Año" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[Nombre_Mes]"
+                      dataType="wstr"
+                      length="20"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[Nombre_Mes]"
+                      name="Nombre_Mes" />
+                    <outputColumn
+                      refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[Nombre_Trimestre]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[Nombre_Trimestre]"
+                      name="Nombre_Trimestre" />
                     <outputColumn
                       refId="Package\Data Flow Task 1\Source 4 - Dim_Fecha.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
                       dataType="i4"
@@ -4990,7 +5062,7 @@
       <DTS:ObjectData>
         <SQLTask:SqlTaskData
           SQLTask:Connection="{3727F27B-F231-4E35-81AC-7234D2D6E30A}"
-          SQLTask:SqlStatementSource="CREATE TABLE `Dim_Categoria` (&#xA;`Categoria_ID` Long,&#xA;`Categoria` LongText&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Cliente` (&#xA;`Cliente_ID` LongText,&#xA;`Compania` LongText,&#xA;`Geografia_ID` Long&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Compania_Envio` (&#xA;`Compania_Envio_ID` Long,&#xA;`Compania_Envio` LongText,&#xA;`Telefono` LongText&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Empleado` (&#xA;`Empleado_ID` Long,&#xA;`Empleado` LongText,&#xA;`Cargo` LongText,&#xA;`Geografia_ID` Long&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Fecha` (&#xA;`Fecha_ID` Long,&#xA;`Dia` Long,&#xA;`Mes` Long,&#xA;`Trimestre` Long,&#xA;`Año` Long&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+          SQLTask:SqlStatementSource="CREATE TABLE `Dim_Categoria` (&#xA;`Categoria_ID` Long,&#xA;`Categoria` LongText&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Cliente` (&#xA;`Cliente_ID` LongText,&#xA;`Compania` LongText,&#xA;`Geografia_ID` Long&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Compania_Envio` (&#xA;`Compania_Envio_ID` Long,&#xA;`Compania_Envio` LongText,&#xA;`Telefono` LongText&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Empleado` (&#xA;`Empleado_ID` Long,&#xA;`Empleado` LongText,&#xA;`Cargo` LongText,&#xA;`Geografia_ID` Long&#xA;)&#xA;GO&#xA;CREATE TABLE `Dim_Fecha` (&#xA;    `Fecha_ID` Long,&#xA;    `Dia` Long,&#xA;    `Mes` Long,&#xA;    `Trimestre` Long,&#xA;    `Año` Long,&#xA;    `Nombre_Mes` LongText,&#xA;    `Nombre_Trimestre` LongText&#xA;)&#xA;GO&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
       </DTS:ObjectData>
     </DTS:Executable>
     <DTS:Executable
@@ -5028,31 +5100,7 @@
   </DTS:Executables>
   <DTS:PrecedenceConstraints>
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[{067CF7FC-CB19-49FC-8948-16DD75BBBF07\}]"
-      DTS:CreationName=""
-      DTS:DTSID="{95FEC350-64DD-4BA2-986E-144A28C7FCA9}"
-      DTS:From="Package\Data Flow Task 1"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="{95FEC350-64DD-4BA2-986E-144A28C7FCA9}"
-      DTS:To="Package\Preparation SQL Task 2" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[{3A189582-6890-41B9-BF84-CE55C2ACEE29\}]"
-      DTS:CreationName=""
-      DTS:DTSID="{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1}"
-      DTS:From="Package\Preparation SQL Task 2"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1}"
-      DTS:To="Package\Data Flow Task 2" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[{47FBE791-9099-4ACA-83F5-37142BC4FCFE\}]"
-      DTS:CreationName=""
-      DTS:DTSID="{F061308A-63AF-46D5-B56C-77FE29C3CCCA}"
-      DTS:From="Package\Data Flow Task 2"
-      DTS:LogicalAnd="True"
-      DTS:ObjectName="{F061308A-63AF-46D5-B56C-77FE29C3CCCA}"
-      DTS:To="Package\Preparation SQL Task 3" />
-    <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[{645DB66E-8119-49A7-821B-0E866D2C5A74\}]"
+      DTS:refId="Package.PrecedenceConstraints[{0C319B13-A264-412C-AA15-740A06983AE5\}]"
       DTS:CreationName=""
       DTS:DTSID="{0C319B13-A264-412C-AA15-740A06983AE5}"
       DTS:From="Package\Preparation SQL Task 3"
@@ -5060,12 +5108,700 @@
       DTS:ObjectName="{0C319B13-A264-412C-AA15-740A06983AE5}"
       DTS:To="Package\Data Flow Task 3" />
     <DTS:PrecedenceConstraint
-      DTS:refId="Package.PrecedenceConstraints[{6E87BCBA-56B2-4C4B-93A7-D8220CA4CD8E\}]"
+      DTS:refId="Package.PrecedenceConstraints[{95FEC350-64DD-4BA2-986E-144A28C7FCA9\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{95FEC350-64DD-4BA2-986E-144A28C7FCA9}"
+      DTS:From="Package\Data Flow Task 1"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{95FEC350-64DD-4BA2-986E-144A28C7FCA9}"
+      DTS:To="Package\Preparation SQL Task 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{980FE6B7-BE30-463A-B930-89C7E3FAA710\}]"
       DTS:CreationName=""
       DTS:DTSID="{980FE6B7-BE30-463A-B930-89C7E3FAA710}"
       DTS:From="Package\Preparation SQL Task 1"
       DTS:LogicalAnd="True"
       DTS:ObjectName="{980FE6B7-BE30-463A-B930-89C7E3FAA710}"
       DTS:To="Package\Data Flow Task 1" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1}"
+      DTS:From="Package\Preparation SQL Task 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1}"
+      DTS:To="Package\Data Flow Task 2" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[{F061308A-63AF-46D5-B56C-77FE29C3CCCA\}]"
+      DTS:CreationName=""
+      DTS:DTSID="{F061308A-63AF-46D5-B56C-77FE29C3CCCA}"
+      DTS:From="Package\Data Flow Task 2"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="{F061308A-63AF-46D5-B56C-77FE29C3CCCA}"
+      DTS:To="Package\Preparation SQL Task 3" />
   </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Data Flow Task 1"
+          TopLeft="19.9,107.1" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Data Flow Task 2"
+          TopLeft="19.9,310.3" />
+        <NodeLayout
+          Size="160,41.6"
+          Id="Package\Data Flow Task 3"
+          TopLeft="19.9000000000001,513.5" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Preparation SQL Task 1"
+          TopLeft="5.5,5.49999999999995" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Preparation SQL Task 2"
+          TopLeft="5.50000000000003,208.7" />
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\Preparation SQL Task 3"
+          TopLeft="5.50000000000006,411.9" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{0C319B13-A264-412C-AA15-740A06983AE5\}]"
+          TopLeft="99.9000000000001,453.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{95FEC350-64DD-4BA2-986E-144A28C7FCA9\}]"
+          TopLeft="99.9,148.7">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{980FE6B7-BE30-463A-B930-89C7E3FAA710\}]"
+          TopLeft="99.9,47.1">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{ADA3CE54-9B81-4F8E-B081-329F5EB81FC1\}]"
+          TopLeft="99.9,250.3">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[{F061308A-63AF-46D5-B56C-77FE29C3CCCA\}]"
+          TopLeft="99.9000000000001,351.9">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59.9999999999999"
+              Start="0,0"
+              End="0,52.4999999999999">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.4999999999999" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 1">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\Data Flow Task 1\Source 4 - Dim_Fecha"
+          TopLeft="470.714286716313,296.705882092867" />
+        <NodeLayout
+          Size="186.4,41.6"
+          Id="Package\Data Flow Task 1\Source 1 - Dim_Cliente"
+          TopLeft="850.000001809427,86.4117646301391" />
+        <NodeLayout
+          Size="221.6,41.6"
+          Id="Package\Data Flow Task 1\Destination 3 - Dim_Empleado"
+          TopLeft="677.857144300123,57.3529411261985" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Data Flow Task 1\Source 3 - Dim_Empleado"
+          TopLeft="617.857144172398,201.117646882536" />
+        <NodeLayout
+          Size="190.4,41.6"
+          Id="Package\Data Flow Task 1\Source - Dim_Categoria"
+          TopLeft="179.285714667367,237.823529203303" />
+        <NodeLayout
+          Size="253.6,41.6"
+          Id="Package\Data Flow Task 1\Destination 2 - Dim_Compania_Envio"
+          TopLeft="290.71428633314,14.5294117519703" />
+        <NodeLayout
+          Size="207.2,41.6"
+          Id="Package\Data Flow Task 1\Destination 1 - Dim_Cliente"
+          TopLeft="383.571429387952,47.4117646643241" />
+        <NodeLayout
+          Size="232.8,41.6"
+          Id="Package\Data Flow Task 1\Source 2 - Dim_Compania_Envio"
+          TopLeft="110.714285949967,74.1764705232168" />
+        <NodeLayout
+          Size="211.2,41.6"
+          Id="Package\Data Flow Task 1\Destination - Dim_Categoria"
+          TopLeft="363.571429345377,114.705882252397" />
+        <NodeLayout
+          Size="203.2,41.6"
+          Id="Package\Data Flow Task 1\Destination 4 - Dim_Fecha"
+          TopLeft="80.7142858861052,311.99999972652" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output]"
+          TopLeft="274.485714667367,237.823529203303">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="194.68571467801,-81.5176469509061"
+              Start="0,0"
+              End="194.68571467801,-74.0176469509061">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-36.758823475453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-36.758823475453"
+                    Point2="0,-40.758823475453"
+                    Point3="4,-40.758823475453" />
+                  <mssgle:LineSegment
+                    End="190.68571467801,-40.758823475453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="190.68571467801,-40.758823475453"
+                    Point2="194.68571467801,-40.758823475453"
+                    Point3="194.68571467801,-44.758823475453" />
+                  <mssgle:LineSegment
+                    End="194.68571467801,-74.0176469509061" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output4]"
+          TopLeft="470.714286716313,317.505882092867">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-186.800000830208,15.294117633653"
+              Start="0,0"
+              End="-179.300000830208,15.294117633653">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-89.4000004151039,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-89.4000004151039,0"
+                    Point2="-93.4000004151039,0"
+                    Point3="-93.4000004151039,4" />
+                  <mssgle:LineSegment
+                    End="-93.4000004151039,11.294117633653" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-93.4000004151039,11.294117633653"
+                    Point2="-93.4000004151039,15.294117633653"
+                    Point3="-97.4000004151039,15.294117633653" />
+                  <mssgle:LineSegment
+                    End="-179.300000830208,15.294117633653" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output3]"
+          TopLeft="718.257144172398,201.117646882536">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70.4000001277244,-102.164705756338"
+              Start="0,0"
+              End="70.4000001277244,-94.6647057563376">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-47.0823528781688" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-47.0823528781688"
+                    Point2="0,-51.0823528781688"
+                    Point3="4,-51.0823528781688" />
+                  <mssgle:LineSegment
+                    End="66.4000001277244,-51.0823528781688" />
+                  <mssgle:CubicBezierSegment
+                    Point1="66.4000001277244,-51.0823528781688"
+                    Point2="70.4000001277244,-51.0823528781688"
+                    Point3="70.4000001277244,-55.0823528781688" />
+                  <mssgle:LineSegment
+                    End="70.4000001277244,-94.6647057563376" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output2]"
+          TopLeft="227.114285949967,74.1764705232168">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="63.6000003831728,-38.8470587712465"
+              Start="0,0"
+              End="56.1000003831728,-38.8470587712465">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-34.8470587712465" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-34.8470587712465"
+                    Point2="0,-38.8470587712465"
+                    Point3="4,-38.8470587712465" />
+                  <mssgle:LineSegment
+                    End="56.1000003831728,-38.8470587712465" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 1.Paths[OLE DB Source Output1]"
+          TopLeft="850.000001809427,107.211764630139">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-259.228572421475,-38.999999965815"
+              Start="0,0"
+              End="-251.728572421475,-38.999999965815">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-125.614286210738,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-125.614286210738,0"
+                    Point2="-129.614286210738,0"
+                    Point3="-129.614286210738,-4" />
+                  <mssgle:LineSegment
+                    End="-129.614286210738,-34.999999965815" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-129.614286210738,-34.999999965815"
+                    Point2="-129.614286210738,-38.999999965815"
+                    Point3="-133.614286210738,-38.999999965815" />
+                  <mssgle:LineSegment
+                    End="-251.728572421475,-38.999999965815" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Source 4 - Dim_Fecha">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task 1\Destination 4 - Dim_Fecha">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 2">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="223.2,41.6"
+          Id="Package\Data Flow Task 2\Destination 7 - Dim_Proveedor"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\Data Flow Task 2\Source 7 - Dim_Proveedor"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Data Flow Task 2\Source 9 - Dim_Territorio"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="196,41.6"
+          Id="Package\Data Flow Task 2\Source 6 - Dim_Producto"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="200,41.6"
+          Id="Package\Data Flow Task 2\Source 5 - Dim_Geografia"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="216.8,41.6"
+          Id="Package\Data Flow Task 2\Destination 6 - Dim_Producto"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="187.2,41.6"
+          Id="Package\Data Flow Task 2\Source 8 - Dim_Region"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="219.2,41.6"
+          Id="Package\Data Flow Task 2\Destination 9 - Dim_Territorio"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="208,41.6"
+          Id="Package\Data Flow Task 2\Destination 8 - Dim_Region"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="220.8,41.6"
+          Id="Package\Data Flow Task 2\Destination 5 - Dim_Geografia"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 2.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 2.Paths[OLE DB Source Output4]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 2.Paths[OLE DB Source Output3]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 2.Paths[OLE DB Source Output2]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 2.Paths[OLE DB Source Output1]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Data Flow Task 3">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="209.6,41.6"
+          Id="Package\Data Flow Task 3\Source 12 - Fact_Inventario"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="260.8,41.6"
+          Id="Package\Data Flow Task 3\Source 10 - Dim_Territorios_Empleado"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="225.6,41.6"
+          Id="Package\Data Flow Task 3\Source 11 - Fact_Cotas_Ventas"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="230.4,41.6"
+          Id="Package\Data Flow Task 3\Destination 12 - Fact_Inventario"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="202.4,41.6"
+          Id="Package\Data Flow Task 3\Source 13 - Fact_Logistica"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="223.2,41.6"
+          Id="Package\Data Flow Task 3\Destination 13 - Fact_Logistica"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="214.4,41.6"
+          Id="Package\Data Flow Task 3\Destination 14 - Fact_Ventas"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="246.4,41.6"
+          Id="Package\Data Flow Task 3\Destination 11 - Fact_Cotas_Ventas"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="281.6,41.6"
+          Id="Package\Data Flow Task 3\Destination 10 - Dim_Territorios_Empleado"
+          TopLeft="NaN,NaN" />
+        <NodeLayout
+          Size="193.6,41.6"
+          Id="Package\Data Flow Task 3\Source 14 - Fact_Ventas"
+          TopLeft="NaN,NaN" />
+        <EdgeLayout
+          Id="Package\Data Flow Task 3.Paths[OLE DB Source Output4]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 3.Paths[OLE DB Source Output3]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 3.Paths[OLE DB Source Output2]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 3.Paths[OLE DB Source Output1]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task 3.Paths[OLE DB Source Output]"
+          TopLeft="NaN,NaN">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="{assembly:Null}"
+              Start="0,0"
+              End="0,0">
+              <mssgle:Curve.Segments>
+                <assembly:Null />
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
